@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no" />
+  <title>BlockWorld - Mini Voxel Game</title>
+  <meta name="description" content="Game voxel 3D sederhana berbasis browser, siap deploy gratis di GitHub Pages." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="game-root">
+    <canvas id="game-canvas" aria-label="Area game BlockWorld" tabindex="0"></canvas>
+
+    <div id="hud" class="panel">
+      <div class="title">BlockWorld</div>
+      <div class="row desktop-help"><b>WASD</b> jalan · <b>Space</b> lompat · <b>Mouse</b> lihat</div>
+      <div class="row desktop-help"><b>Klik kiri</b> hancurkan · <b>Klik kanan</b> pasang</div>
+      <div class="row mobile-help"><b>Kiri</b> jalan · <b>Geser layar</b> lihat · tombol kanan untuk aksi</div>
+      <div class="row">Block aktif: <span id="active-block-name">Grass</span></div>
+      <div class="row small desktop-help">Tekan <b>1-4</b> untuk ganti block · <b>Esc</b> keluar mouse lock</div>
+    </div>
+
+    <button id="start-button" class="start-card" type="button">
+      <span class="game-name">BlockWorld</span>
+      <span class="subtitle">Mulai bermain</span>
+      <span class="hint desktop-help">Klik lalu browser akan meminta mouse lock agar kontrol 3D nyaman.</span>
+      <span class="hint mobile-help">Sentuh tombol ini, lalu geser area kosong layar untuk melihat sekitar.</span>
+    </button>
+
+    <div id="crosshair" aria-hidden="true">+</div>
+
+    <div id="touch-controls" class="hidden" aria-hidden="true">
+      <div class="touch-left" aria-label="Kontrol gerak">
+        <button type="button" data-move="forward">▲</button>
+        <div>
+          <button type="button" data-move="left">◀</button>
+          <button type="button" data-move="backward">▼</button>
+          <button type="button" data-move="right">▶</button>
+        </div>
+      </div>
+
+      <div class="touch-right" aria-label="Kontrol aksi">
+        <div class="touch-blocks" aria-label="Pilih block">
+          <button type="button" data-block="0" class="selected">Grass</button>
+          <button type="button" data-block="1">Dirt</button>
+          <button type="button" data-block="2">Stone</button>
+          <button type="button" data-block="3">Sand</button>
+        </div>
+        <div class="touch-actions">
+          <button type="button" id="touch-jump">Jump</button>
+          <button type="button" id="touch-break">Break</button>
+          <button type="button" id="touch-place">Place</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="error-box" class="hidden" role="alert"></div>
+
+    <noscript>
+      <div class="noscript">Game ini membutuhkan JavaScript aktif.</div>
+    </noscript>
+  </div>
+
+  <script type="module" src="game.js"></script>
+</body>
+</html>

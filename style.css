@@ -1,0 +1,277 @@
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #87ceeb;
+  color: #ffffff;
+  overscroll-behavior: none;
+}
+
+button {
+  font: inherit;
+  touch-action: none;
+  user-select: none;
+}
+
+#game-root,
+#game-canvas {
+  width: 100vw;
+  height: 100vh;
+  display: block;
+}
+
+#game-canvas {
+  outline: none;
+  touch-action: none;
+}
+
+.panel {
+  position: fixed;
+  top: calc(14px + env(safe-area-inset-top));
+  left: calc(14px + env(safe-area-inset-left));
+  max-width: min(430px, calc(100vw - 28px));
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(0, 0, 0, 0.48);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.22);
+  z-index: 5;
+  line-height: 1.35;
+  user-select: none;
+  pointer-events: none;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+  margin-bottom: 4px;
+}
+
+.row {
+  font-size: 13px;
+  opacity: 0.96;
+}
+
+.small {
+  font-size: 12px;
+  opacity: 0.82;
+}
+
+.mobile-help {
+  display: none;
+}
+
+.start-card {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  width: min(360px, calc(100vw - 40px));
+  height: 210px;
+  border: 0;
+  border-radius: 24px;
+  color: #fff;
+  background: linear-gradient(145deg, rgba(37, 117, 47, 0.94), rgba(23, 80, 100, 0.94));
+  box-shadow: 0 22px 70px rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  cursor: pointer;
+  z-index: 10;
+  text-align: center;
+  padding: 24px;
+}
+
+.start-card:hover,
+.start-card:focus-visible {
+  transform: translateY(-1px);
+  outline: 3px solid rgba(255, 255, 255, 0.45);
+}
+
+.game-name {
+  font-size: 38px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.subtitle {
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.hint {
+  font-size: 12px;
+  opacity: 0.86;
+}
+
+#crosshair {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 28px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.88);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+  z-index: 4;
+  user-select: none;
+  pointer-events: none;
+}
+
+.hidden {
+  display: none !important;
+}
+
+#touch-controls {
+  position: fixed;
+  inset: auto 0 calc(18px + env(safe-area-inset-bottom)) 0;
+  z-index: 6;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 12px;
+  padding: 0 calc(18px + env(safe-area-inset-right)) 0 calc(18px + env(safe-area-inset-left));
+  pointer-events: none;
+}
+
+#touch-controls button {
+  pointer-events: auto;
+  border: 0;
+  border-radius: 14px;
+  min-width: 54px;
+  min-height: 48px;
+  margin: 4px;
+  font-size: 13px;
+  font-weight: 800;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
+}
+
+#touch-controls button:active,
+#touch-controls button.selected {
+  background: rgba(54, 150, 70, 0.78);
+}
+
+.touch-left {
+  text-align: center;
+}
+
+.touch-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  max-width: 50vw;
+}
+
+.touch-actions,
+.touch-blocks {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.touch-blocks button {
+  min-width: 50px;
+  min-height: 38px;
+  font-size: 11px;
+  border-radius: 12px;
+}
+
+#error-box {
+  position: fixed;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+  z-index: 30;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: rgba(120, 20, 20, 0.92);
+  color: #fff;
+  line-height: 1.4;
+}
+
+.noscript {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: #111;
+  color: #fff;
+  z-index: 20;
+  padding: 24px;
+  text-align: center;
+}
+
+@media (max-width: 760px), (pointer: coarse) {
+  #hud {
+    top: calc(8px + env(safe-area-inset-top));
+    left: calc(8px + env(safe-area-inset-left));
+    right: calc(8px + env(safe-area-inset-right));
+    max-width: none;
+    padding: 10px 12px;
+  }
+
+  .title {
+    font-size: 17px;
+  }
+
+  .row {
+    font-size: 12px;
+  }
+
+  .desktop-help,
+  .row.small {
+    display: none;
+  }
+
+  .mobile-help {
+    display: inline;
+  }
+
+  .start-card {
+    width: min(340px, calc(100vw - 34px));
+    min-height: 205px;
+    height: auto;
+  }
+
+  .game-name {
+    font-size: 34px;
+  }
+
+  #touch-controls {
+    display: flex;
+  }
+}
+
+@media (max-width: 520px) {
+  #touch-controls {
+    padding-left: calc(8px + env(safe-area-inset-left));
+    padding-right: calc(8px + env(safe-area-inset-right));
+    bottom: calc(10px + env(safe-area-inset-bottom));
+  }
+
+  #touch-controls button {
+    min-width: 46px;
+    min-height: 43px;
+    margin: 3px;
+    font-size: 12px;
+  }
+
+  .touch-blocks button {
+    min-width: 44px;
+    min-height: 34px;
+    font-size: 10px;
+  }
+}
