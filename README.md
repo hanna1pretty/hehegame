@@ -70,3 +70,4 @@ Audit dasar yang sudah dilakukan:
 - `index.html`: struktur halaman game.
 - `style.css`: tampilan desktop dan mobile.
 - `game.js`: logic game, movement, block placement, collision, dan touch control.
+Update deploy
