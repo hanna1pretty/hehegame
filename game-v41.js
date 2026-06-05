@@ -1,24 +1,11 @@
 import * as THREE from 'https://unpkg.com/three@0.160.0/build/three.module.js';
 
-const GAME_VERSION = '4.2.0-lts';
 const errorBox = document.getElementById('errorBox');
-const loadingScreen = document.getElementById('loadingScreen');
 window.addEventListener('error', (event) => showError(event.message));
 window.addEventListener('unhandledrejection', (event) => showError(String(event.reason || event)));
 function showError(message) {
-  if (!errorBox) { console.error(message); return; }
   errorBox.style.display = 'block';
-  errorBox.textContent = 'Game error: ' + message + '\nVersion: ' + GAME_VERSION;
-}
-function hideLoading() { if (loadingScreen) loadingScreen.style.display = 'none'; }
-function getSavedNumber(name, fallback) {
-  try {
-    const value = Number(localStorage.getItem('blockworld_' + name));
-    return Number.isFinite(value) ? value : fallback;
-  } catch { return fallback; }
-}
-function saveSetting(name, value) {
-  try { localStorage.setItem('blockworld_' + name, String(value)); } catch {}
+  errorBox.textContent = 'Game error: ' + message;
 }
 
 const canvas = document.getElementById('gameCanvas');
@@ -127,7 +114,7 @@ let paused = false;
 let pointerLocked = false;
 let lastTime = performance.now();
 let actionCooldown = 0;
-let cameraMode = getSavedNumber('cameraMode', 1);
+let cameraMode = 1;
 const cameraModes = [
   { name: 'Dekat', distance: 0, height: 0, top: false },
   { name: 'Normal', distance: 4.8, height: 1.0, top: false },
@@ -136,9 +123,6 @@ const cameraModes = [
   { name: 'Top', distance: 3.5, height: 9.0, top: true }
 ];
 
-cameraMode = THREE.MathUtils.clamp(cameraMode, 0, 4);
-selectedIndex = THREE.MathUtils.clamp(getSavedNumber('selectedIndex', selectedIndex), 0, blockKeys.length - 1);
-selectedBlock = blockKeys[selectedIndex] || 'grass';
 const joystickState = { active: false, id: null, x: 0, y: 0, max: 42 };
 
 function key(x, y, z) { return `${x},${y},${z}`; }
@@ -306,8 +290,7 @@ function updateSelected(blockOrIndex) {
   if (!blockTypes[block] || block === 'water') return;
   selectedBlock = block;
   selectedIndex = idx;
-  if (statusText) statusText.textContent = `${blockLabels[selectedBlock]} • ${cameraModes[cameraMode].name}`;
-  saveSetting('selectedIndex', selectedIndex);
+  statusText.textContent = `${blockLabels[selectedBlock]} • ${cameraModes[cameraMode].name}`;
   document.querySelectorAll('.slot').forEach((slot, i) => slot.classList.toggle('selected', i === selectedIndex));
   const selectedSlot = document.querySelector(`.slot[data-index="${selectedIndex}"]`);
   selectedSlot?.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
@@ -333,7 +316,6 @@ function cycleSelected(dir) {
 
 function setCameraMode(index) {
   cameraMode = THREE.MathUtils.clamp(index, 0, cameraModes.length - 1);
-  saveSetting('cameraMode', cameraMode);
   updateSelected(selectedIndex);
   document.querySelectorAll('#cameraPanel button').forEach(btn => btn.classList.toggle('active', Number(btn.dataset.camera) === cameraMode));
 }
@@ -514,8 +496,7 @@ function updateTargetHighlight() {
 }
 
 function animate(now) {
-  hideLoading();
-requestAnimationFrame(animate);
+  requestAnimationFrame(animate);
   const dt = Math.min(0.033, (now - lastTime) / 1000 || 0.016);
   lastTime = now;
   if (!running || paused) {
@@ -648,9 +629,8 @@ function resetJoystick(e) {
 }
 
 createHotbar();
+updateSelected(0);
 setCameraMode(cameraMode);
-updateSelected(selectedIndex);
 generateWorld();
 updateCamera();
-hideLoading();
 requestAnimationFrame(animate);

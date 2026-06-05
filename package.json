@@ -1,11 +1,9 @@
 {
-  "name": "blockworld-v4-final",
-  "version": "4.0.0",
+  "name": "blockworld-v4-2-lts-stable",
+  "version": "4.2.0",
+  "description": "Stable mobile-friendly voxel game for GitHub Pages",
   "private": true,
-  "description": "A lightweight voxel block-building game for GitHub Pages.",
-  "type": "module",
   "scripts": {
-    "check": "node --check game.js",
-    "serve": "python -m http.server 8080"
+    "check": "node --check game-v42.js"
   }
 }

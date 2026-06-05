@@ -1,87 +1,69 @@
-# BlockWorld v4 Final
+# BlockWorld v4.2 LTS Stable
 
-BlockWorld adalah game voxel 3D sederhana berbasis browser. Project ini dibuat agar bisa dimainkan gratis melalui GitHub Pages tanpa backend.
+BlockWorld adalah game voxel 3D sederhana berbasis browser. Project ini dibuat untuk deploy gratis di GitHub Pages.
 
-Catatan: ini bukan Minecraft resmi, tidak memakai nama/aset Minecraft, dan hanya dibuat sebagai game block-building sederhana untuk belajar.
+> Catatan: ini bukan Minecraft resmi dan tidak memakai aset Minecraft. Ini hanya game block-building sederhana untuk belajar.
 
-## Fitur v4 Final
+## Kenapa v4.2 LTS?
 
-- Hotbar item ala game voxel di bagian bawah layar.
-- Tap slot hotbar untuk memilih block.
-- Scroll mouse atau tombol angka 1-9 untuk pilih item di desktop.
-- Target block berada di tengah layar memakai crosshair.
-- Block yang sedang ditarget diberi outline putih.
-- Break dan Place mengikuti target di tengah layar.
-- Joystick analog untuk mobile.
-- Pilihan kamera: 1P, Normal, Jauh, Cinematic, Top.
-- Collision lebih kuat agar player tidak mudah tembus tembok/block.
-- Kamera third-person lebih aman supaya tidak gampang masuk ke tanah/block.
-- Dunia lebih hidup: bukit, pantai, air, pohon, bunga, rumput kecil, batu, matahari, awan bergerak, dan burung sederhana.
-- Tetap static HTML/CSS/JS, cocok untuk GitHub Pages.
+Versi ini dibuat supaya tidak perlu terlalu sering update. File utama memakai nama versi baru:
 
-## Kontrol Mobile
+- `game-v42.js`
+- `style-v42.css`
 
-- Analog kiri: jalan.
-- Geser layar kanan: lihat sekitar.
-- Hotbar bawah: pilih item/block.
-- Jump: lompat.
-- Break: hancurkan block yang ditarget di tengah layar.
-- Place: pasang block di sisi block yang ditarget.
-- Angle: ganti kamera.
-- Reset: buat ulang dunia.
-- Pause: jeda game.
+Tujuannya agar browser tidak mengambil file lama dari cache.
 
-## Kontrol Desktop
+## Fitur
 
-- WASD / Arrow: jalan.
-- Mouse: lihat sekitar.
-- Space: lompat.
-- Klik kiri: hancurkan block.
-- Klik kanan: pasang block.
-- Angka 1-9: pilih item.
-- Scroll mouse / Q / E: ganti item.
-- C: ganti kamera.
-- R: reset dunia.
+- Dunia 3D berbasis block.
+- Hotbar item ala Minecraft di bagian bawah layar.
+- Tap hotbar untuk memilih item/block.
+- Target block di tengah layar dengan outline putih.
+- Break dan Place mengikuti crosshair/tengah layar.
+- Mobile memakai analog joystick kiri.
+- Geser layar kanan untuk melihat arah.
+- Tombol Jump, Break, Place, Angle, Reset, Pause.
+- Kamera: 1P, Normal, Jauh, Cinematic, Top.
+- Desktop: WASD, mouse, klik kiri/kanan, angka 1-9, Q/E, C, R.
+- Dunia lebih hidup: bukit, pantai, air, pohon, bunga, rumput, batu, matahari, awan, dan burung.
+- Collision player diperkuat supaya tidak mudah tembus block.
+- Kamera third-person dicegah masuk ke block/tanah.
+- Pengaturan pilihan item dan kamera disimpan di browser.
+- Ada loading screen dan error box untuk membantu audit.
 
-## Cara deploy ke GitHub Pages
+## Cara update ke GitHub Pages
 
-1. Upload semua file project ke root repository.
-2. Pastikan `index.html`, `style.css`, dan `game.js` terlihat langsung di halaman utama repository.
-3. Masuk ke `Settings -> Pages`.
-4. Pilih:
-   - Source: `Deploy from a branch`
-   - Branch: `main`
-   - Folder: `/root`
-5. Klik Save.
-6. Tunggu 1-5 menit.
-
-Jika nama repository adalah `hehegame`, link biasanya:
+Upload/replace semua file ini ke root repository:
 
 ```text
-https://hanna1pretty.github.io/hehegame/
+index.html
+game-v42.js
+style-v42.css
+README.md
+package.json
 ```
 
-Untuk memaksa browser mengambil versi baru, buka:
+File lama seperti `game.js`, `game-v41.js`, `style.css`, dan `style-v41.css` boleh dibiarkan, karena `index.html` v4.2 sudah memanggil file versi baru.
+
+Setelah commit, buka:
 
 ```text
-https://hanna1pretty.github.io/hehegame/?v=4
+https://hanna1pretty.github.io/hehegame/?v=42
 ```
 
-## Audit v4
+## Audit v4.2
 
 Audit dasar yang dilakukan:
 
-- `node --check game.js` lolos.
-- Semua file utama tersedia.
-- ID HTML yang dipakai JavaScript tersedia.
-- ZIP berhasil dibuat dan dites strukturnya.
-- Tidak memakai backend/server.
-- Tidak memakai build step.
-- Aman untuk GitHub Pages static hosting.
+- Validasi struktur file.
+- Syntax check JavaScript dengan `node --check`.
+- Pemeriksaan referensi file di `index.html`.
+- Pemeriksaan ID HTML yang dipakai JavaScript.
+- Pemeriksaan ZIP tidak corrupt.
+- Validasi bahwa project tetap static HTML/CSS/JS dan aman untuk GitHub Pages.
 
 ## Keterbatasan
 
 - Game membutuhkan koneksi internet untuk mengambil Three.js dari CDN.
-- Performa tergantung HP/browser.
-- Collision sudah diperkuat, tetapi di HP yang sangat lag masih mungkin terasa kurang sempurna.
-- Belum ada save/load world, crafting, monster, atau multiplayer.
+- Belum ada crafting, monster kompleks, save/load world penuh, atau multiplayer.
+- Performa tetap tergantung HP/browser.

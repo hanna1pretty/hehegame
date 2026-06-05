@@ -4,11 +4,12 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
   <meta name="theme-color" content="#7fcdf0" />
-  <title>BlockWorld v4 Final</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>BlockWorld v4.2 LTS Stable</title>
+  <link rel="stylesheet" href="style-v42.css?v=4.2.0" />
 </head>
 <body>
   <canvas id="gameCanvas"></canvas>
+  <div id="loadingScreen">Memuat BlockWorld...</div>
   <div id="crosshair" aria-hidden="true"></div>
 
   <div id="miniHud" class="glass-panel">
@@ -16,8 +17,8 @@
   </div>
 
   <div id="menu" class="glass-panel">
-    <h1>BlockWorld v4</h1>
-    <p>Final mobile update: hotbar ala Minecraft, target block di tengah layar, collision lebih kuat, joystick analog, pilihan kamera, dan dunia yang lebih hidup.</p>
+    <h1>BlockWorld v4.2 LTS</h1>
+    <p>Stable long-term update: cache aman, hotbar tengah, target block, collision diperkuat, joystick analog, kamera lengkap, dan dunia lebih hidup.</p>
     <button id="startBtn" class="primary">Mulai Game</button>
     <div class="help">
       <b>Mobile:</b> analog kiri untuk jalan, geser layar kanan untuk lihat, tap hotbar bawah untuk pilih item, Break/Place untuk aksi.<br>
@@ -56,6 +57,6 @@
 
   <div id="errorBox" role="alert"></div>
 
-  <script type="module" src="game.js"></script>
+  <script type="module" src="game-v42.js?v=4.2.0"></script>
 </body>
 </html>
