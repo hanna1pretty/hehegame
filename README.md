@@ -1,73 +1,75 @@
-# BlockWorld - Mini Voxel Game
+# BlockWorld v2 - Mini Voxel Game
 
-BlockWorld adalah game voxel 3D sederhana berbasis browser. Project ini dibuat untuk deploy gratis di GitHub Pages.
+BlockWorld v2 adalah game voxel 3D sederhana berbasis browser. Project ini siap deploy gratis di GitHub Pages.
 
 > Catatan: ini bukan Minecraft resmi dan tidak memakai aset Minecraft. Ini hanya game block-building sederhana untuk belajar.
 
-## Fitur
+## Update besar v2.0
 
-- Dunia 3D berbasis block.
-- Jalan dengan keyboard desktop: `W A S D`.
-- Lompat: `Space`.
-- Lihat sekitar: mouse pada desktop, geser layar pada mobile.
-- Hancurkan block: klik kiri desktop atau tombol `Break` mobile.
-- Pasang block: klik kanan desktop atau tombol `Place` mobile.
-- Pilih block: tombol `1-4` desktop atau tombol Grass/Dirt/Stone/Sand mobile.
-- UI responsif untuk layar HP.
-- Aman untuk GitHub Pages karena hanya memakai file static HTML/CSS/JS.
+- Kontrol mobile diperbaiki.
+- Tombol jalan kiri dibuat aktif memakai pointer events.
+- UI teks besar di atas layar dihapus supaya layar game lebih bersih.
+- Map dibuat lebih hidup: bukit, pantai, kolam air, pohon, bunga, pasir, batu, tanah, dan rumput.
+- Ditambahkan matahari dan awan bergerak.
+- Pilihan item/block diperbaiki dan bisa dipilih di HP maupun desktop.
+- Ditambahkan tombol Tilt untuk membuat kamera sedikit miring.
+- Tombol Break/Place mobile bisa ditekan tahan.
+- Ditambahkan Pause, Reset Dunia, dan pesan kecil/toast.
 
-## Cara menjalankan lokal
+## Kontrol
 
-Cara paling mudah:
+### Mobile
 
-1. Buka folder project.
-2. Jalankan static server lokal, misalnya dengan Python:
+- Geser layar: melihat arah.
+- Tombol kiri: jalan maju, mundur, kiri, kanan.
+- Jump: lompat.
+- Break: hancurkan block.
+- Place: pasang block.
+- Tilt: kamera miring.
+- Pilih block dari bar kanan bawah.
 
-```bash
-python -m http.server 8080
-```
+### Desktop
 
-3. Buka browser ke:
+- WASD / Arrow Keys: jalan.
+- Space: lompat.
+- Mouse: lihat arah.
+- Klik kiri: hancurkan block.
+- Klik kanan: pasang block.
+- 1-8: pilih block.
+- C: tilt kamera.
+- Esc: pause.
 
-```text
-http://localhost:8080
-```
+## Deploy gratis ke GitHub Pages
 
-Jangan menjalankan langsung dari `file://` karena browser dapat membatasi module JavaScript.
-
-## Cara deploy gratis ke GitHub Pages
-
-1. Buat repository baru di GitHub, misalnya `blockworld`.
-2. Upload semua file project ke repository tersebut.
-3. Masuk ke `Settings` → `Pages`.
-4. Pada `Build and deployment`, pilih:
+1. Upload semua file ini langsung ke root repository.
+2. Masuk ke `Settings` -> `Pages`.
+3. Pada `Build and deployment`, pilih:
    - Source: `Deploy from a branch`
    - Branch: `main`
    - Folder: `/root`
-5. Klik `Save`.
-6. Tunggu hingga GitHub memberi link Pages.
+4. Klik Save.
+5. Tunggu sampai muncul link live.
 
-## Audit versi ini
+Jika repo bernama `hehegame`, link biasanya:
+
+```txt
+https://hanna1pretty.github.io/hehegame/
+```
+
+## Audit v2.0
 
 Audit dasar yang sudah dilakukan:
 
 - Validasi struktur file utama: `index.html`, `style.css`, `game.js`, `README.md`, `package.json`.
-- Syntax check JavaScript menggunakan `node --check`.
-- Cek referensi ID HTML yang dipakai di JavaScript.
+- Syntax check JavaScript dengan `node --check`.
+- Cek referensi ID HTML yang dipakai JavaScript.
 - Cek import module Three.js.
-- Cek kesiapan GitHub Pages: tidak perlu backend, database, atau build step.
-- Perbaikan mobile: kontrol touch, pemilih block mobile, tampilan safe-area, dan pencegahan tombol UI ikut memicu aksi game.
+- Cek tidak ada backend, database, atau build step.
+- Cek fitur mobile: tombol gerak, break, place, jump, tilt, dan selector block.
 
 ## Keterbatasan
 
-- Game membutuhkan koneksi internet untuk mengambil Three.js dari CDN.
-- Performa tergantung HP/browser. Dunia dibuat kecil supaya ringan.
-- Belum ada save/load world.
-- Belum ada inventory kompleks, crafting, monster, atau multiplayer.
-
-## File penting
-
-- `index.html`: struktur halaman game.
-- `style.css`: tampilan desktop dan mobile.
-- `game.js`: logic game, movement, block placement, collision, dan touch control.
-Update deploy
+- Membutuhkan internet untuk mengambil Three.js dari CDN.
+- Belum ada save/load world permanen.
+- Belum ada crafting, monster, inventory kompleks, multiplayer, atau sistem survival.
+- Performa bergantung pada browser dan spesifikasi HP.
